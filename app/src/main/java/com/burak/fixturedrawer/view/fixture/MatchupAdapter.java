@@ -3,6 +3,7 @@ package com.burak.fixturedrawer.view.fixture;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.burak.fixturedrawer.R;
 import com.burak.fixturedrawer.domain.model.Matchup;
+import com.burak.fixturedrawer.util.GlideApp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,16 +41,28 @@ public class MatchupAdapter extends RecyclerView.Adapter<MatchupAdapter.MatchupV
 
         private TextView textViewHomeTeam;
         private TextView textViewAwayTeam;
+        private ImageView imageViewHomeLogo;
+        private ImageView imageViewAwayLogo;
 
         public MatchupViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewHomeTeam = itemView.findViewById(R.id.textViewHomeTeamName);
             textViewAwayTeam = itemView.findViewById(R.id.textViewAwayTeamName);
+            imageViewHomeLogo = itemView.findViewById(R.id.imgHomeTeamLogo);
+            imageViewAwayLogo = itemView.findViewById(R.id.imgAwayTeamLogo);
         }
 
         public void bind(Matchup matchup) {
             textViewHomeTeam.setText(matchup.homeTeam.name);
             textViewAwayTeam.setText(matchup.awayTeam.name);
+
+            GlideApp.with(itemView.getContext())
+                    .load(matchup.homeTeam.logo)
+                    .into(imageViewHomeLogo);
+
+            GlideApp.with(itemView.getContext())
+                    .load(matchup.awayTeam.logo)
+                    .into(imageViewAwayLogo);
         }
     }
 

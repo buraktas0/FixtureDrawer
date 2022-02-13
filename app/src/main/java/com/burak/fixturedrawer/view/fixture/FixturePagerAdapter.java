@@ -30,7 +30,7 @@ public class FixturePagerAdapter extends RecyclerView.Adapter<FixturePagerAdapte
 
     @Override
     public void onBindViewHolder(@NonNull FixtureViewHolder holder, int position) {
-        ((TextView)holder.itemView.findViewById(R.id.textWeekNo)).setText(String.valueOf(position + 1));
+        ((TextView)holder.itemView.findViewById(R.id.textWeekNo)).setText("WEEK " + (position + 1));
 
         MatchupAdapter matchupAdapter = matchupAdapterList.get(position);
         RecyclerView recyclerView = holder.itemView.findViewById(R.id.recyclerViewMatchups);

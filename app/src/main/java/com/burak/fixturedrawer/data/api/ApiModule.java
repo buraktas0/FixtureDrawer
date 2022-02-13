@@ -18,7 +18,7 @@ public class ApiModule {
     @Provides
     public Retrofit provideRetrofit() {
         return new Retrofit.Builder()
-                .baseUrl("https://soccerleagueteams.free.beeceptor.com/")
+                .baseUrl("https://6204cfde161670001741af6f.mockapi.io/api/")
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
