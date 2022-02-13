@@ -1,8 +1,10 @@
 package com.burak.fixturedrawer.view.main;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -10,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.burak.fixturedrawer.R;
 import com.burak.fixturedrawer.domain.model.Team;
+import com.burak.fixturedrawer.util.GlideApp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,14 +41,21 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder
     public class TeamViewHolder extends RecyclerView.ViewHolder{
 
         private TextView textViewTeamName;
+        private ImageView imageViewLogo;
 
         public TeamViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewTeamName = itemView.findViewById(R.id.textViewTeamName);
+            imageViewLogo = itemView.findViewById(R.id.imgListItemLogo);
         }
 
         public void bind(Team team) {
             textViewTeamName.setText(team.name);
+
+            GlideApp.with(itemView.getContext())
+                    .load(team.logo)
+                    .into(imageViewLogo);
+
         }
     }
 
