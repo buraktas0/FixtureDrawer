@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">FixtureDrawer</string>
+    <string name="common_error_message">Şu anda işleminizi gerçekleştiremiyoruz</string>
+</resources>
