@@ -7,13 +7,21 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
 import com.burak.fixturedrawer.R;
 import com.burak.fixturedrawer.domain.model.Team;
+import com.burak.fixturedrawer.view.fixture.FixtureActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
 
     MainViewModel viewModel;
@@ -32,13 +40,13 @@ public class MainActivity extends AppCompatActivity {
         viewModel.teamsLiveData.observe(this, new Observer<List<Team>>() {
             @Override
             public void onChanged(List<Team> teamList) {
-
+                teamAdapter.setTeams(teamList);
             }
         });
         viewModel.errorsLivedata.observe(this, new Observer<Integer>() {
             @Override
-            public void onChanged(Integer integer) {
-
+            public void onChanged(Integer errorResId) {
+                Toast.makeText(MainActivity.this, getString(errorResId), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -46,6 +54,14 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         teamAdapter = new TeamAdapter();
         recyclerView.setAdapter(teamAdapter);
+
+        FloatingActionButton fabDraw = findViewById(R.id.fabDraw);
+        fabDraw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, FixtureActivity.class));
+            }
+        });
 
         viewModel.load();
     }

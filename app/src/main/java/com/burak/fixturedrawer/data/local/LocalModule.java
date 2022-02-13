@@ -13,7 +13,7 @@ public class LocalModule {
 
     @Singleton
     @Provides
-    public static LocalService provideLocalService(LocalService localService) {
+    public static LocalService provideLocalService() {
         return new LocalService();
     }
 }
